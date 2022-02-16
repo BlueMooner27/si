@@ -12,12 +12,12 @@ Debemos desabilitar y parar uno de ellos en este caso desabilitaremos el de la i
 
 ```bash
 # Esto para el servicio
-systemctl stop NetworkManager
+-> systemctl stop NetworkManager
 ```
 
 ```bash
 # Esto arranca el servicio
-systemctl start NetworkManager
+-> systemctl start NetworkManager
 ```
 
 ```bash
@@ -40,9 +40,6 @@ systemctl start NetworkManager
 
 El fichero para grabar la configuración de red permanentemente es /etc/network/interfaces
 
-
-
-
 ## COMANDO IP
 
 ### Mostrar las interfaces de red
@@ -64,9 +61,13 @@ $ ip a show dev enp0s3
 
 ```bash
 $ ip route
+$ ip ro
+$ ip r
 ```
 
 ### Configuar una interfaz de red
+
+- Sintaxis: ip \<address|addr|a\> \<add|del> direccion dev disposito
 
 ```bash
 -> ip a add 192.168.10.20/24 dev enp0s3
@@ -84,8 +85,8 @@ $ ip ro
 $ ip route
 ```
 
-### Añadir una puerta de enlace
-
+### Añadir/borrar una puerta de enlace
+- sintaxis: ip route \<add|del\> \<dirección\> via \<gateway\> 
 ```bash
 # Debemos tener una ip dentro de la misma red
 -> ip r add 20.0.0.0/24 via 192.168.10.254
@@ -99,4 +100,16 @@ $ ip route
 
 ```bash
 -> ip a flush dev enp0s3
+```
+
+### Fichero de configuración de red
+
+- El fichero de configuración de red **en debian** es **/etc/network/interfaces**
+
+```
+auto enp0s3
+inet enp0s3 inet static
+address 192.168.1.101
+netmask 255.255.255.128
+gateway 192.168.1.1
 ```
