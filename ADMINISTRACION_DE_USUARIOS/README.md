@@ -1,6 +1,8 @@
-# USUARIOS COMUNUES Y SUPERUSUARIO
+# ADMINISTRACIÓN DE USUARIOS
 
-## Usuarios comunes
+## USUARIOS COMUNUES Y SUPERUSUARIO
+
+### Usuarios comunes
 
 Los usuarios comunes:
 
@@ -10,7 +12,7 @@ Los usuarios comunes:
 - No puede instalar ni actualizar configuraciones
 - No puede manipular archivos de otros usuarios
 
-## Superusuario/root
+### Superusuario/root
 
 El superusuario o usuario root
 
