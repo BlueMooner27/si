@@ -109,15 +109,14 @@ $ ip route
 
 ```
 auto enp0s3
-inet enp0s3 inet static
+iface enp0s3 inet static
 address 192.168.1.101
 netmask 255.255.255.128
 gateway 192.168.1.1
 ```
-
 - Configuración automática
 
 ```
 auto enp0s3
-inet enp0s3 inet dhcp
+iface enp0s3 inet dhcp
 ```
