@@ -271,7 +271,10 @@ $ cat /etc/passwd | egrep "prueba2"
   - Fecha del último cambio de contraseña. Se indica a través de días a partir de 1/1/1970
   - Días mínimos de validad de clave. Indica que si yo cambio la contraseña hoy voy a tener que esperar los días indicados para volver a cambiar la contraseña, si se indica 0 puedo volver a cambiar la contraseña tantas veces como quiera
   - Días máximos de validez de clave. Indica cuantos días tiene validez la clave que yo he cambiado, pasados esos días tendré que cambiar la contraseña para poder seguir utilizando la cuenta
-  - Periodo de aviso de clave. Indica cuantos días 
+  - Periodo de aviso de clave. Indica los días de antelación con los que el sistema me avisará antes de que caduque la contraseña
+  - Periodo de inactividad de clave. Indica el número de días después de la expiración de la contraseña para que nuestra contraseña se bloquee
+  - Fecha de espiración de la cuenta
+  - Campo reservado para posibles nuevos campos
 
 
 - Ejemplos:
@@ -281,5 +284,120 @@ $ cat /etc/shadow | egrep "prueba2"
 # Muestra: prueba2:!:19041:0:99999:7::
 $ cat /etc/shadow | egrep "german"
 # Muestra: german:$y$j9T$dXaZvsIavSPL3sttE52aM1$E/Y8uCj16o0Ogc6.uR/mxpYnBTwGauymA.8fidJR9g8:18900:0:99999:7:::
+
+# Modificamos la fecha de expiración
+-> usermod -e 2022-02-28 prueba2
+# Mostramos el cambio
+$ cat /etc/shadow | egrep "prueba2"
 ```
+
+### Comando chage
+
+- Cambia la fecha de expiración de un usuario o su contraseña
+- Este comando requiere privilegios de administrador
+- Sintaxis: chage [opciones] [usuario]
+- Opciones:
+  - -l => Lista información
+  - -d fecha => Establece último cambio de clave
+  - -E fecha => Establece fecha de expiración de la cuenta
+  - -I días => Establece días antes de inactividad
+  - -m días => Establece mínimo de días de validez de la clave
+  - -M días => Establece máximo de días de validez de la clave
+  - -w días => Establece aviso antes de cadudidad
+- Ejemplos:
+
+```bash
+-> chage -l prueba2
+-> chage -m 1 prueba2
+-> chage -M 30 prueba2
+-> chage -l prueba2
+```
+
+### Comando getent
+
+- Consulta una base de datos (usarios, contraseñas, grupos)
+- Este comando requiere privilegios de administrador si se consulta información de contraseñas
+- Podría conectarse a otras fuentes de usuarios, una base de datos mysql, un directorio ldap, etc.
+- Sintaxis: getent base_de_datos [usuario]
+
+- Ejemplos
+
+```bash
+$ getent passwd 
+$ getent passwd german
+$ getent shadow # Solo administrador
+$ getent shadow german # Solo administrador
+$ getent group
+$ getent gshadow
+```
+
+### Comando passwd
+
+- Para cambiar la contraseña y parámetros relacionados con la cuenta
+- Este comando requiere privilegios de administrador para establecer cambios en otras cuentas que no sean las del propio usuario
+- Sintaxis: passwd [opciones] \<usuario\>
+- Opciones: 
+  - l => Bloquea la cuenta
+  - u => Desbloquea la cuenta
+  - e fecha => Establece expiración de la contraseña
+  - n días => Establece el mínimo de días de validez de la contraseña
+  - x días => Establece el máximo de días de validez de la contraseña
+  - w días => Establece el número de días del preaviso para cambiar la contraseña
+  - i días => Establece el número de días después del cual la cuenta quedará inhabilitada
+  - S => Muesta información
+- Ejemplos:
+
+```sh
+passwd -S
+passwd -l prueba
+passwd -u prueba
+```
+
+***
+
+## Ficheros /etc/group y /etc/gshadow
+
+### Fichero /etc/group
+
+- Contiene información sobre los grupos
+- Campos
+  - Nombre del grupo
+  - Contraseña (Normalmente "*")
+  - Id del grupo
+  - Lista de usuarios
+- Ejemplos:
+
+```sh
+$ getent group users
+# Muestra: users:x:100:prueba2
+```
+
+### Fichero /etc/gshadow
+
+- Contiene información sobre contraseña y administradores
+- Campos
+  - Nombre del grupo
+  - Contraseña cifrada, utilizada para usuarios que pueden acceder al grupo temporalmente para realizar algunas tareas
+  - Administradores
+    - Pueden cambiar la contraseña
+    - Pueden elimnar o añadir a miembros
+  - Lista de usuarios
+- Ejemplos:
+
+```sh
+-> getent gshadow users
+# Muestra: users:*::prueba2
+```
+
+***
+
+## Comandos para grupos
+
+### Comando groupadd 
+
+- Crea un grupo
+- Sintaxis: groupadd [opciones] \<nombre_grupo\>
+
+- Como administradores podemos cambiar la contraseña del un grupo mediante el comando `gpasswd`
+
 
