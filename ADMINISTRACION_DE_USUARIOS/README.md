@@ -216,6 +216,7 @@ Para los grupos hemos de definir:
 -> usermod -G users prueba2
 # Añade grupos secundarios
 -> usermod -aG games prueba2
+```
 
 ***
 
