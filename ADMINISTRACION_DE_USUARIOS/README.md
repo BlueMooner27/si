@@ -138,11 +138,11 @@ Para los grupos hemos de definir:
   - -d directorio => Directorio
   - -D => Muestra valores por defecto
   - -e yyyy-mm-dd => Indicamos la fecha de expiración de un usuario
-  - - g grupo_primario => Indicamos el grupo primario al que queremos que pertenezca el usuario
-  - - G grupos_secudarios => Indicamos los grupos secundarios a los que queremos que pretenezca el usuario, separados por comas
-  - - m => Indica que cree el directorio personal del usuario ya que por defecto este comando no lo crea
-  - - s interprete => Indicamos la shell del usuario
-  - - u uid => Indicamos el uid del usuario 
+  - -g grupo_primario => Indicamos el grupo primario al que queremos que pertenezca el usuario
+  - -G grupos_secudarios => Indicamos los grupos secundarios a los que queremos que pretenezca el usuario, separados por comas
+  - -m => Indica que cree el directorio personal del usuario ya que por defecto este comando no lo crea
+  - -s interprete => Indicamos la shell del usuario
+  - -u uid => Indicamos el uid del usuario 
 
 - Ejemplo:
 
