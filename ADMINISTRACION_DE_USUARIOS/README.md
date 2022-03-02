@@ -340,7 +340,7 @@ $ getent gshadow
 - Opciones: 
   - -l => Bloquea la cuenta
   - -u => Desbloquea la cuenta
-  - -e fecha => Establece expiración de la contraseña
+  - -e => Expira contraseña
   - -n días => Establece el mínimo de días de validez de la contraseña
   - -x días => Establece el máximo de días de validez de la contraseña
   - -w días => Establece el número de días del preaviso para cambiar la contraseña
