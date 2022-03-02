@@ -138,11 +138,11 @@ Para los grupos hemos de definir:
   - -d directorio => Directorio
   - -D => Muestra valores por defecto
   - -e yyyy-mm-dd => Indicamos la fecha de expiración de un usuario
-  - g grupo_primario => Indicamos el grupo primario al que queremos que pertenezca el usuario
-  - G grupos_secudarios => Indicamos los grupos secundarios a los que queremos que pretenezca el usuario, separados por comas
-  - m => Indica que cree el directorio personal del usuario ya que por defecto este comando no lo crea
-  - s interprete => Indicamos la shell del usuario
-  - u uid => Indicamos el uid del usuario 
+  - - g grupo_primario => Indicamos el grupo primario al que queremos que pertenezca el usuario
+  - - G grupos_secudarios => Indicamos los grupos secundarios a los que queremos que pretenezca el usuario, separados por comas
+  - - m => Indica que cree el directorio personal del usuario ya que por defecto este comando no lo crea
+  - - s interprete => Indicamos la shell del usuario
+  - - u uid => Indicamos el uid del usuario 
 
 - Ejemplo:
 
@@ -196,17 +196,17 @@ Para los grupos hemos de definir:
 - Este comando requiere privilegios de administrador
 - Sintaxis: usermod [opciones] \<usuario\>
 - Opciones
-  - c comentario => Establece un comentario
-  - d directorio => Establece el directorio personal (esta opción suele ejecutarse con -m)
-  - m => Mueve lo que estaba en el directorio antiguo al nuevo
-  - e yyyy-mm-dd => Establece fecha de espiración
-  - g grupo => Establece el grupo principal
-  - G grupos => Establece grupos secundarios (esta opción suele ejecutarse con -a)
-  - a => Añade grupos secundarios a los que ya tiene
-  - s interprete => Establece interprete de comandos
-  - u uid => Establece el identificador del usuario. Si cambiamos el uid de un usuario debemos cambiar el propietario del directorio/fichero del usuario
-  - U => Desbloquea el usario
-  - L => Bloquea un usuario
+  - -c comentario => Establece un comentario
+  - -d directorio => Establece el directorio personal (esta opción suele ejecutarse con -m)
+  - -m => Mueve lo que estaba en el directorio antiguo al nuevo
+  - -e yyyy-mm-dd => Establece fecha de espiración
+  - -g grupo => Establece el grupo principal
+  - -G grupos => Establece grupos secundarios (esta opción suele ejecutarse con -a)
+  - -a => Añade grupos secundarios a los que ya tiene
+  - -s interprete => Establece interprete de comandos
+  - -u uid => Establece el identificador del usuario. Si cambiamos el uid de un usuario debemos cambiar el propietario del directorio/fichero del usuario
+  - -U => Desbloquea el usario
+  - -L => Bloquea un usuario
 - Ejemplos
 
 ```bash
@@ -228,8 +228,8 @@ Para los grupos hemos de definir:
 - Este comando requiere privilegios de administrador
 - Sintaxis: userdel [opciones] \<usuario\>
 - Opciones:
-  - f => Fuerza la eliminación del usuario incluso si el usuario esta en sesión
-  - r => Elimina también su directorio personal
+  - -f => Fuerza la eliminación del usuario incluso si el usuario esta en sesión
+  - -r => Elimina también su directorio personal
 - Ejemplos:
 
 ```bash
@@ -338,14 +338,14 @@ $ getent gshadow
 - Este comando requiere privilegios de administrador para establecer cambios en otras cuentas que no sean las del propio usuario
 - Sintaxis: passwd [opciones] \<usuario\>
 - Opciones: 
-  - l => Bloquea la cuenta
-  - u => Desbloquea la cuenta
-  - e fecha => Establece expiración de la contraseña
-  - n días => Establece el mínimo de días de validez de la contraseña
-  - x días => Establece el máximo de días de validez de la contraseña
-  - w días => Establece el número de días del preaviso para cambiar la contraseña
-  - i días => Establece el número de días después del cual la cuenta quedará inhabilitada
-  - S => Muesta información
+  - -l => Bloquea la cuenta
+  - -u => Desbloquea la cuenta
+  - -e fecha => Establece expiración de la contraseña
+  - -n días => Establece el mínimo de días de validez de la contraseña
+  - -x días => Establece el máximo de días de validez de la contraseña
+  - -w días => Establece el número de días del preaviso para cambiar la contraseña
+  - -i días => Establece el número de días después del cual la cuenta quedará inhabilitada
+  - -S => Muesta información
 - Ejemplos:
 
 ```sh
