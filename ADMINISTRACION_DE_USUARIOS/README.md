@@ -398,7 +398,61 @@ $ getent group users
 
 - Crea un grupo
 - Sintaxis: groupadd [opciones] \<nombre_grupo\>
+- Opciones:
+  - -g gid=> gid del grupo
+  - -p constraseña => Contraseña
+  - -r => Grupo del sistema
 
-- Como administradores podemos cambiar la contraseña del un grupo mediante el comando `gpasswd`
+### Comando groupmod
 
+- Modifica las propiedades de un grupo
+- Sintaxis: groupmod [opciones] \<nombre_grupo\>
+- Opciones: 
+  - -n nombre => Modifica el nombre de un grupo nombre
+  - -p contraseña => Modifica la contraseña del grupo
 
+### Comando gpasswd
+- Cambia la contraseña o propiedades del grupo
+- Este comando requiere privilegios de administrador
+- Sintaxis: gpasswd [opciones] \<nombre_grupo>
+- Opciones:
+  - -a usuario => Añade usuario al grupo
+  - -d usuario => Elimina usuario del grupo
+  - -r => Elimina contraseña
+  - -M usuarios => Añade usuarios al grupo
+  - -A administradores => Establece administradores
+
+```bash
+# Creación del grupo si
+-> groupadd si
+# Cambio de contraseña del grupo si
+-> gpasswd si
+# Comprobamos la creación y el cambio de contraseña
+-> cat /etc/gshadow | egrep "si" 
+# Muestra: si:$6$6VqWAct5uU/OhQmw$AacKyFXKCoC80526yviSI732TZOTDttJEj.VWgz/vTUqyuCLD2BTTMKme8TwvfxkGrcboPHXrzsBNtAWqNMMP/::
+
+# Añade usaurio luna al grupo si
+-> gpasswd -a luna si
+# Establece usuario luna al grupo si
+-> gpasswd -M luna,carlos si
+
+# Establece administrador del grupo a german
+-> gpasswd -A german si
+# Confirmamos resultado
+-> cat /etc/gshadow | egrep si
+# Muestra: si:$6$6VqWAct5uU/OhQmw$AacKyFXKCoC80526yviSI732TZOTDttJEj.VWgz/vTUqyuCLD2BTTMKme8TwvfxkGrcboPHXrzsBNtAWqNMMP/:german:luna
+
+```
+
+# Comando newgrp 
+
+- Nos permite adherirnos a un grupo temporalmente (si sabemos la contraseña)
+- Sintaxis: newgrp \<nombre_grupo\>
+
+```bash
+# Como usuario filipe nos añadimos al grupo si
+filipe@debian:~$ newgrp si
+# Comprobamos el resultado
+filipe@debian:~$ groups
+# Muestra: si filipe
+```
